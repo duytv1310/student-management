@@ -1,0 +1,31 @@
+<br>
+<div><button [routerLink]="['/studentform/0']"  mat-raised-button color="primary"><mat-icon>library_add</mat-icon>THEM SINH VIEN</button></div>
+<br>
+<table id="container"  >
+  <tr >
+    <th>XOA</th>
+    <th>SUA</th>
+    <th>Id</th>
+    <th>Code</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Gender</th>
+    <th>Date of birth </th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Picture</th>
+  </tr>
+  <tr *ngFor="let student of students" >  
+   <td><mat-icon (click)="removeStudent(student.id)" style="cursor: pointer;" >delete</mat-icon></td>
+   <td><mat-icon (click)="getStudentDetails(student.id)" style="cursor: pointer" >edit</mat-icon></td>  
+    <td>{{ student.id }}</td>
+    <td>{{ student?.code }}</td>
+    <td>{{ student?.firstName }}</td>
+    <td>{{ student?.lastName }}</td>
+    <td>{{ student?.gender }}</td>
+    <td>{{ student?.dob |date:'mediumDate'}}</td>
+    <td>{{ student?.email }}</td>
+    <td>{{ student?.phone }}</td>
+    <td> <img src="{{ student?.picture }}" alt=""> </td>
+  </tr>
+</table>

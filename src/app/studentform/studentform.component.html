@@ -1,0 +1,76 @@
+<h1>FORM</h1>
+<form #studentForm="ngForm">
+ 
+    <label >Code: </label>
+    <input id="code" class="form-control" type="text" [(ngModel)]="student.code"  name="code"  />
+
+    <label for="firstName">First Name:</label><strong style="color: red;" *ngIf="firstName.untouched&&id===0"> * required </strong>
+    <input id="firstName" class="form-control" type="text" [(ngModel)]="student.firstName" required #firstName="ngModel" name="firstName" minlength="2" pattern="[a-zA-Z ]*"/>
+    <div *ngIf="firstName.invalid&&(firstName.dirty||firstName.touched)" style="color: red;">
+        <div *ngIf="firstName.errors?.['required']">First name is required</div>
+        <div *ngIf="firstName.errors?.['minlength']">First name is at least 2 letters long</div>
+        <div *ngIf="firstName.errors?.['pattern']">First name should only contains letters</div>
+    </div>
+
+    <label for="lastName">Last Name: </label><strong style="color: red;" *ngIf="lastName.untouched&&id===0"> * required </strong>
+    <input id="lastName" class="form-control" type="text" [(ngModel)]="student.lastName" required #lastName="ngModel" name="lastName" minlength="2" pattern="[a-zA-Z]*"/>
+    <div *ngIf="lastName.invalid&&(lastName.dirty||lastName.touched)" style="color: red;">
+        <div *ngIf="lastName.errors?.['required']">First name is required</div>
+        <div *ngIf="lastName.errors?.['minlength']">First name is at least 2 letters long</div>
+        <div *ngIf="lastName.errors?.['pattern']">First name should only contains letters</div>
+    </div>
+
+    <label for="gender">Gender: </label><strong style="color: red;" *ngIf="gender.untouched&&id===0"> * required </strong>
+    <div >
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="gender"  [(ngModel)]="student.gender" #gender="ngModel" value="male" checked required>
+            <label class="form-check-label" for="gender">Male</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="gender" [(ngModel)]="student.gender" #gender="ngModel" value="female" checked>
+            <label class="form-check-label" for="gender">Female</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="gender" [(ngModel)]="student.gender" #gender="ngModel" value="other" checked>
+            <label class="form-check-label" for="gender">Other</label>
+        </div>  
+    </div>
+    
+    <label for="dob">Date of birth: </label><strong style="color: red;" *ngIf="dob.untouched&&id===0"> * required </strong>
+    <input id="dob" class="form-control" type="date" [(ngModel)]="student.dob" required #dob="ngModel" name="dob" />
+    <div *ngIf="dob.value"></div>
+
+
+    <label for="email">Email: </label><strong style="color: red;" *ngIf="email.untouched&&id===0"> * required </strong>
+    <input id="email" class="form-control" type="text" [(ngModel)]="student.email" required #email="ngModel" name="email" pattern="[a-zA-Z0-9\-\.]+[@][a-z]+[\.][a-z]{2,4}"/>
+    <div *ngIf="email.invalid&&(email.touched||email.dirty)" style="color: red;">  
+        <div *ngIf="email.errors?.['required']">Email is required</div> 
+        <div *ngIf="email.errors?.['pattern']">Invalid email</div>
+    </div>
+
+    <label for="phone">Phone: </label><strong style="color: red;" *ngIf="phone.untouched&&id===0"> * required </strong>
+    <input id="phone" class="form-control" type="text" [(ngModel)]="student.phone" required #phone="ngModel" name="phone" minlength="4"  pattern="[0-9 \- () ]*"/>
+    <div *ngIf="phone.invalid&&(phone.dirty||phone.touched)" style="color: red;">
+        <div *ngIf="phone.errors?.['required']">Phone is required</div>
+        <div *ngIf="phone.errors?.['pattern']">Phone should only contains number</div>
+        <div *ngIf="phone.errors?.['minlength']">Invalid phone number</div>
+    </div>
+
+    <label for="picture">Picture: </label>
+    <input id="picture" class="form-control" type="text" [(ngModel)]="student.picture"  #picture="ngModel" name="picture" />
+    <!-- <div *ngIf="picture.invalid&&(picture.dirty||picture.touched)" style="color: red;"></div> -->
+   
+  
+    <br>
+    <button mat-raised-button color="primary" [routerLink]="['/students']">QUAY LAI</button>
+    
+    <button mat-raised-button color="primary" (click)="saveAndBacktoList(studentForm.value)" *ngIf="id===0" [disabled]="studentForm.invalid" >LUU VA TRO VE</button>
+
+    <button mat-raised-button color="primary" (click)="save(studentForm.value)" *ngIf="id===0" (click)="studentForm.reset()" [disabled]="studentForm.invalid" >LUU</button>
+    
+    <button mat-raised-button color="primary" (click)="saveAndBacktoList(studentForm.value)" *ngIf="id!==0" [disabled]="studentForm.invalid" >LUU</button>
+    <button mat-raised-button color="primary" (click)="randomStudent(studentForm)" *ngIf="id===0" >LAY NGAU NHIEN</button>
+    <button mat-raised-button color="primary" (click)="studentForm.reset()" >RESET FORM</button>
+
+
+</form>

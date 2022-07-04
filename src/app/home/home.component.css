@@ -1,0 +1,11 @@
+.color {
+  color: blue;
+}
+.under18 {
+  background-color: red;
+  font-size: large;
+}
+.over18 {
+  background-color: blue;
+  font-size: large;
+}
